@@ -78,7 +78,6 @@ Q()
 
         fs.symlinkSync(from, to, 'dir');
     });
-
 })
 .then(function() {
     console.log("");
