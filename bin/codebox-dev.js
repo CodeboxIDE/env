@@ -85,7 +85,7 @@ Q()
 .then(function() {
     console.log("");
     console.log("You're ready to go! Run codebox using:")
-    console.log("    $ cd "+path.relative(process.cwd(), base)+" && bin/codebox.js");
+    console.log("    $ cd "+path.relative(process.cwd(), codeboxBase)+" && bin/codebox.js");
 })
 .fail(function(err) {
     console.log("Error:", err);
