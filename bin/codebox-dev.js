@@ -6,16 +6,14 @@ var Q = require('q');
 var fs = require('fs');
 var wrench = require('wrench');
 var path = require('path');
+var exec = require('child_process').exec;
 var GitHubApi = require('github-api');
-var Gittle = require("gittle");
+var Gittle = require('gittle');
 
-var base = path.resolve(argv.base || "./Codebox");
+var base = path.resolve(argv._[0] || "./Codebox");
 var codeboxBase = path.resolve(base, "codebox");
 var codeboxOrg = "CodeboxIDE";
 var packagePrefix = "package-";
-
-
-console.log("Initialize Codebox Development Environment in", base);
 
 function cloneRepo(pkg) {
     return Q()
@@ -33,6 +31,7 @@ function cloneRepo(pkg) {
 
 Q()
 .then(function() {
+    console.log("Initialize Codebox Development Environment in", base);
     console.log(" -> Listing GitHub repositories");
     var github = new GitHubApi({});
     var user = github.getUser();
@@ -78,6 +77,10 @@ Q()
 
         fs.symlinkSync(from, to, 'dir');
     });
+})
+.then(function() {
+    console.log("-> Install node dependencies for codebox");
+    return Q.nfcall(exec, "npm install .", { cwd: codeboxBase });
 })
 .then(function() {
     console.log("");
