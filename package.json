@@ -1,6 +1,7 @@
 {
     "name": "codebox-dev",
-    "version": "0.0.0",
+    "version": "1.0.0",
+    "preferGlobal": true,
     "dependencies": {
         "minimist": "1.1.1",
         "lodash": "3.6.0",
@@ -11,5 +12,9 @@
     },
     "bin": {
         "codebox-dev": "./bin/codebox-dev.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/CodeboxIDE/env.git"
     }
 }
