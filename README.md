@@ -13,3 +13,9 @@ Then run it to setup your environment using:
 ```
 $ codebox-dev ./Codebox
 ```
+
+You can update all your packages using:
+
+```
+$ codebox-dev ./Codebox --fetch
+```
