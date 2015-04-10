@@ -29,6 +29,27 @@ function cloneRepo(pkg) {
     });
 }
 
+function runCommand(cmd, opts) {
+    var d = Q.defer();
+
+    var child = exec(cmd, opts, function (error, stdout, stderr) {
+        if (error) return d.reject(error);
+        d.resolve({
+            stdout: stdout,
+            stderr: stderr
+        });
+    });
+
+    child.stdout.pipe(process.stdout); /*on('data', function (data) {
+        console.log(data);
+    });*/
+    child.stderr.pipe(process.stderr);/*.on('data', function (data) {
+        console.log(data);
+    });*/
+
+    return d.promise;
+}
+
 Q()
 .then(function() {
     console.log("Initialize Codebox Development Environment in", base);
@@ -80,7 +101,11 @@ Q()
 })
 .then(function() {
     console.log("-> Install node dependencies for codebox");
-    return Q.nfcall(exec, "npm install .", { cwd: codeboxBase });
+    return runCommand("npm install .", { cwd: codeboxBase });
+})
+.then(function() {
+    console.log("-> Build codebox");
+    return runCommand("./node_modules/.bin/gulp", { cwd: codeboxBase });
 })
 .then(function() {
     console.log("");
