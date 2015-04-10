@@ -8,7 +8,8 @@
         "q": "1.2.0",
         "github-api": "0.10.4",
         "wrench": "1.5.8",
-        "gittle": "0.2.3"
+        "gittle": "0.2.3",
+        "colors": "1.0.3"
     },
     "bin": {
         "codebox-dev": "./bin/codebox-dev.js"
